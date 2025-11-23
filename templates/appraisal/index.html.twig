@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Заказать услугу оценки{% endblock %}
+
+{% block body %}
+    <h1>Заказать услугу оценки</h1>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    {% for error in validate %}
+        <div class="alert alert-danger">{{ error.message }} </div>
+    {% endfor %}
+
+    <form action="{{ path('appraisal') }}" method="post">
+        <div>
+            <label for="appraisal">Услуга</label>
+            <select name="appraisalId" id="appraisalDropdown">
+                <option value="" disabled selected hidden>Выберите вариант</option>
+                {% for appraisal in appraisals %}
+                    <option value="{{ appraisal.Id }}" data-price="{{ appraisal.Price }}"> {{ appraisal.Name }}</option>
+                {% endfor %}
+            </select>
+            <ul id="appraisal-price"></ul>
+        </div>
+
+
+        <div>
+            <label for="email">Электронная почта</label>
+            <input type="text" id="email" name="email" required>
+        </div>
+
+        <button type="submit">Подтвердить</button>
+    </form>
+    {% verbatim %}
+        <script>
+            document.getElementById('appraisalDropdown').addEventListener('change', function() {
+                const price = this.options[this.selectedIndex].getAttribute('data-price');
+                document.getElementById('appraisal-price').textContent = "Стоимость :"  + price;
+            });
+        </script>
+    {% endverbatim %}
+{% endblock %}

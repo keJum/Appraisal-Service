@@ -11,17 +11,17 @@ final class Version20251123145938 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'create new table user from auth';
+        return 'Создание новой таблицы Users';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql('CREATE TABLE user ('.
+        $this->addSql('CREATE TABLE users ('.
             'id INT AUTO_INCREMENT NOT NULL, '.
-            'username VARCHAR(180) NOT NULL, '.
+            'email VARCHAR(180) NOT NULL, '.
             'roles JSON NOT NULL, '.
             'password VARCHAR(255) NOT NULL, '.
-            'UNIQUE INDEX UNIQ_IDENTIFIER_USERNAME (username), '.
+            'UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email), '.
             'PRIMARY KEY (id)) '.
             'DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
     }
