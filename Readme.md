@@ -7,3 +7,7 @@
 
 # Разворачивание 
  1. `$ mv .env.example .env`
+
+# Тестирование
+
+В контейнере php из проекта Appraisal-Infrastructure выполнить `$ php bin/phpunit`
