@@ -10,16 +10,16 @@
     {% endif %}
 
     {% for error in validate %}
-        <div class="alert alert-danger">{{ error.message }} </div>
+        <div class="alert alert-danger" id="error">{{ error.message }} </div>
     {% endfor %}
 
     <form action="{{ path('appraisal') }}" method="post">
         <div>
             <label for="appraisal">Услуга</label>
-            <select name="appraisalId" id="appraisalDropdown">
+            <select name="name" id="appraisalDropdown">
                 <option value="" disabled selected hidden>Выберите вариант</option>
                 {% for appraisal in appraisals %}
-                    <option value="{{ appraisal.Id }}" data-price="{{ appraisal.Price }}"> {{ appraisal.Name }}</option>
+                    <option value="{{ appraisal.Name }}" data-price="{{ appraisal.Price }}"> {{ appraisal.Name }}</option>
                 {% endfor %}
             </select>
             <ul id="appraisal-price"></ul>

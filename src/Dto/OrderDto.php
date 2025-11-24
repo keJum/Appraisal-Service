@@ -15,18 +15,17 @@ class OrderDto
         get => $this->email;
     }
 
-    #[Assert\Type('integer')]
     #[Assert\NotBlank]
-    public ?int $appraisalId {
-        set(?int $appraisalId) {
-            $this->appraisalId = $appraisalId;
+    public ?string $name {
+        set(?string $name) {
+            $this->name = $name;
         }
-        get => $this->appraisalId;
+        get => $this->name;
     }
 
-    public function __construct(?string$email, ?string $appraisalId)
+    public function __construct(?string $email, ?string $name)
     {
        $this->email = $email;
-       $this->appraisalId = $appraisalId;
+       $this->name = $name;
     }
 }

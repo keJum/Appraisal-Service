@@ -25,7 +25,8 @@ class AppraisalController extends AbstractController
     {
         return $this->render('appraisal/index.html.twig', [
             'appraisals' => $this->appraisalRepository->findAll(),
-            'error' => ''
+            'error' => '',
+            'validate' => ''
         ]);
     }
 
@@ -35,7 +36,7 @@ class AppraisalController extends AbstractController
         $error = '';
         $validate = [];
         try{
-            $order->create(new OrderDto($request->get('email'), $request->get('appraisalId')));
+            $order->create(new OrderDto($request->get('email'), $request->get('name')));
         } catch (OrderFactoryNotFoundAppraisalException $e) {
             $error = $e->getMessage();
         } catch (ValidateException $e) {

@@ -28,7 +28,7 @@ readonly class OrderFactory
     {
         $this->validate($this->validator, $dto);
 
-        $appraisal = $this->appraisalRepository->findOneBy(['id' => $dto->appraisalId]);
+        $appraisal = $this->appraisalRepository->findOneBy(['name' => $dto->name]);
         if (is_null($appraisal)) {
             throw new OrderFactoryNotFoundAppraisalException('Not found Appraisal');
         }
