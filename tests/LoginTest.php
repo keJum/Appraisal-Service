@@ -32,10 +32,7 @@ class LoginTest extends WebTestCase
     public function testWithData(): void
     {
         $this->loadFixtures();
-
-
         $crawler = $this->client->request('GET', '/login');
-
 
         $form = $crawler->selectButton('Войти')->form([
             '_username' => 'test@example.com',
@@ -43,8 +40,10 @@ class LoginTest extends WebTestCase
         ]);
         $this->client->submit($form);
 
-        // 3. Проверяем редирект после входа
         self::assertResponseRedirects('/appraisal');
+
+        $purger = new ORMPurger($this->em);
+        $purger->purge();
     }
 
     public function testSecurePageAfterLogin(): void
@@ -70,5 +69,8 @@ class LoginTest extends WebTestCase
         $client->request('GET', '/appraisal');
         self::assertResponseIsSuccessful();
         self::assertSelectorTextContains('h1', 'Заказать услугу оценки');
+
+        $purger = new ORMPurger($em);
+        $purger->purge();
     }
 }
